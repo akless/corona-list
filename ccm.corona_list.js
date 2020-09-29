@@ -17,7 +17,8 @@
     config: {
 //    "css": [ "ccm.load", "https://ccmjs.github.io/akless-components/quick_question/resources/styles.css" ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/quick_question/resources/helper.mjs" ],
-      "html": [ "ccm.load", "https://akless.github.io/corona-list/resources/templates.mjs" ]
+      "html": [ "ccm.load", "https://akless.github.io/corona-list/resources/templates.mjs" ],
+      "qr_code": [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
     },
 
     Instance: function () {
@@ -29,7 +30,53 @@
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        this.element.innerHTML = 'Hello, World!';
+        const onConfirm = () => {
+
+          const results = $.formData( this.element );
+
+          const validInputResults = async () => {
+            const { email, tel } = results;
+
+            if ( !email && !tel ) return false;
+
+            // verify email
+            if ( email ) {
+              //sendEmail( email );
+              //const number = await enterConfirmNumber();
+              //if ( !validNumber( number ) ) return false;
+            }
+
+            // verify tel
+            if ( tel ) {
+              //sendSms( tel );
+              //const number = await enterConfirmNumber();
+              //if ( !validNumber( number ) ) return false;
+            }
+
+            return true;
+          };
+
+          if ( !validInputResults() ) return;
+
+          const showQrCode = () => {
+
+            const secret = btoa( JSON.stringify( results ) );
+            try {
+              const demoQRCode = qrcode( 0, 'M' );
+              demoQRCode.addData( 'https://akless.github.io/corona-list/#' + secret );
+              demoQRCode.make();
+              const qrCodeSVGTag = document.createElement( 'div' );
+              qrCodeSVGTag.innerHTML = demoQRCode.createImgTag();
+              $.setContent( this.element, qrCodeSVGTag.firstChild );
+            } catch ( e ) {}
+
+          };
+
+          showQrCode();
+
+        };
+
+        $.render( $.html( this.html.input, onConfirm ), this.element );
 
       };
 

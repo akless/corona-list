@@ -7,7 +7,9 @@
 ccm.files[ 'resources.js' ] = {
 
   /** test configuration (relative paths) */
-  "local": {},
+  "local": {
+    "html": [ "ccm.load", "./resources/templates.mjs" ]
+  },
 
   /** demo configuration (absolute paths) */
   "demo": {}
