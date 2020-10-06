@@ -12,11 +12,11 @@
 
     name: 'corona_list',
 
-    ccm: 'https://ccmjs.github.io/akless-components/quick_question/resources/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-26.0.0.js',
 
     config: {
 //    "css": [ "ccm.load", "https://ccmjs.github.io/akless-components/quick_question/resources/styles.css" ],
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/quick_question/resources/helper.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-6.0.0.mjs" ],
       "html": [ "ccm.load", "https://akless.github.io/corona-list/resources/templates.mjs" ],
       "qr_code": [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
     },
@@ -30,53 +30,95 @@
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        const onConfirm = () => {
+        const guestView = () => {
 
-          const results = $.formData( this.element );
+          /** when user submits the input form */
+          const onConfirm = () => {
 
-          const validInputResults = async () => {
-            const { email, tel } = results;
+            const validInputResults = async () => {
 
-            if ( !email && !tel ) return false;
+              const { email, tel } = results;
 
-            // verify email
-            if ( email ) {
-              //sendEmail( email );
-              //const number = await enterConfirmNumber();
-              //if ( !validNumber( number ) ) return false;
-            }
+              if ( !email && !tel ) return false;
 
-            // verify tel
-            if ( tel ) {
-              //sendSms( tel );
-              //const number = await enterConfirmNumber();
-              //if ( !validNumber( number ) ) return false;
-            }
+              // verify email
+              if ( email ) {
+                //sendEmail( email );
+                //const number = await enterConfirmNumber();
+                //if ( !validNumber( number ) ) return false;
+              }
 
-            return true;
+              // verify tel
+              if ( tel ) {
+                //sendSms( tel );
+                //const number = await enterConfirmNumber();
+                //if ( !validNumber( number ) ) return false;
+              }
+
+              return true;
+            };
+
+            /** input data */
+            const results = $.formData( this.element );
+
+            // not valid? => abort
+            if ( !validInputResults() ) return;
+
+            // encrypt input data
+            const secret = btoa( JSON.stringify( results ) );
+
+            sessionStorage.setItem( 'corona-list', secret )
+            showQrCode( secret );
+
           };
 
-          if ( !validInputResults() ) return;
+          /** renders the inputs in the webpage area of the web component */
+          const renderInputs = secret => {
+            $.render( $.html( this.html.input, onConfirm, () => showQrCode( secret ) ), this.element );
+            let uncrypted;
+            if ( secret )
+              uncrypted = JSON.parse( window.atob( secret ) );
+            $.fillForm( this.element, uncrypted );
+          };
 
-          const showQrCode = () => {
+          /** shows the QR code in the webpage area of the web component */
+          const showQrCode = secret => {
+            console.log( 'http://localhost:63342/corona-list/local.html#' + secret );
+            $.render( $.html( this.html.qrcode, () => renderInputs( secret ) ), this.element );
 
-            const secret = btoa( JSON.stringify( results ) );
             try {
               const demoQRCode = qrcode( 0, 'M' );
               demoQRCode.addData( 'https://akless.github.io/corona-list/#' + secret );
               demoQRCode.make();
               const qrCodeSVGTag = document.createElement( 'div' );
               qrCodeSVGTag.innerHTML = demoQRCode.createImgTag();
-              $.setContent( this.element, qrCodeSVGTag.firstChild );
+              $.setContent( this.element.querySelector( '#qrcode' ), qrCodeSVGTag.firstChild );
             } catch ( e ) {}
 
           };
 
-          showQrCode();
+          // get already existing encrypted user data from Session Storage (if any exists)
+          const secret = sessionStorage.getItem( 'corona-list' );
+
+          // user data exists? => show QR code
+          if ( secret )
+            showQrCode( secret );
+          // render inputs for user
+          else
+            renderInputs( secret );
 
         };
+        const restaurantOwnerView = () => {
 
-        $.render( $.html( this.html.input, onConfirm ), this.element );
+          const renderTable = () => {
+            $.render( $.html( this.html.table, new Date( Date.now() ).toString(), secretFromWebURL ), this.element );
+          };
+
+          renderTable();
+        };
+
+        const secretFromWebURL = location.href.split( '#' )[ 1 ];
+        secretFromWebURL ? restaurantOwnerView() : guestView();
 
       };
 

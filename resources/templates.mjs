@@ -6,7 +6,7 @@
 
 import { html } from 'https://unpkg.com/lit-html';
 
-export const input = onConfirm => html`
+export const input = ( onConfirm, onCancel ) => html`
   <table>
     <tr>
       <td><label>Email:</label></td>
@@ -18,4 +18,23 @@ export const input = onConfirm => html`
     </tr>
   </table>
   <button @click=${onConfirm}>CONFIRM</button>
+  <button @click="${onCancel}">CANCEL</button>
+`;
+
+export const qrcode = onClick => html`
+  <div id="qrcode"></div>
+  <button @click="${onClick}">EDIT</button>
+`;
+
+export const table = ( timestamp, secret ) => html`
+  <table border="1">
+    <tr>
+      <th>Timestamp</th>
+      <th>Guest Secret</th>
+    </tr>
+    <tr>
+      <td>${timestamp}</td>
+      <td>${secret}</td>
+    </tr>
+  </table>
 `;
