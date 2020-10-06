@@ -66,14 +66,22 @@
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        const secretFromWebURL = location.href.split( '#' )[ 1 ];
-        secretFromWebURL ? restaurantOwnerView() : guestView();
+        /**
+         * encoded guest data from web URL (if any exists)
+         * @type {string}
+         */
+        const web_url_data = location.href.split( '#' )[ 1 ];
+
+        if ( web_url_data )      // has encoded guest data from web URL?
+          restaurantOwnerView()  // => render restaurant owner view
+        else                     // otherwise:
+          guestView();           // => render guest view
 
         /** renders the guest view in the webpage area */
         function guestView() {
 
           // get already existing encoded guest data from Session Storage (if any exists)
-          let encoded_guest_data = sessionStorage.getItem( 'corona-list' );
+          const encoded_guest_data = sessionStorage.getItem( 'corona-list' );
 
           if ( encoded_guest_data )                   // has encoded guest data?
             renderGuestQrCode( encoded_guest_data );  // => show QR code
@@ -184,7 +192,7 @@
           renderTable();
 
           function renderTable() {
-            $.render( $.html( self.html.table, new Date( Date.now() ).toString(), secretFromWebURL ), self.element );
+            $.render( $.html( self.html.table, new Date( Date.now() ).toString(), web_url_data ), self.element );
           }
 
         }
