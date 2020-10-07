@@ -1,0 +1,21 @@
+/**
+ * @overview default layout of ccmjs-based web component for corona list
+ * @author André Kless <andre.kless@web.de.de> 2020
+ */
+
+#element {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+#qrcode,
+#button {
+  text-align: center;
+}
+
+h1 {
+  padding: 0.2em 0;
+}
+
+*[data-hidden] {
+  visibility: hidden;
+}

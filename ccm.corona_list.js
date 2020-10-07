@@ -33,7 +33,12 @@
      */
     config: {
       "html": [ "ccm.load", "https://akless.github.io/corona-list/resources/templates.mjs" ],                     // default HTML templates
-//    "css": [ "ccm.load", "https://ccmjs.github.io/akless-components/quick_question/resources/styles.css" ],     // default layout
+      "css": [ "ccm.load",                                                                                        // default layout => bootstrap and fonts
+        "https://akless.github.io/corona-list/resources/styles.css",
+        "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css",
+        { "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css" },
+        { "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css", "context": "head" }
+      ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-6.0.0.mjs" ],    // useful help functions
       "qr_code": [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]  // JavaScript library for creating QR codes
     },
@@ -95,14 +100,17 @@
           function renderGuestForm( initial_values ) {
 
             // render HTML template for entering guest data in the webpage area of the component
-            $.render( $.html( self.html.guestForm, onConfirm, onCancel ), self.element );
+            $.render( $.html( self.html.guestForm, onSubmit, onCancel, onDelete, initial_values ), self.element );
 
-            // has start values? => fill the input fields with initial values
-            if ( initial_values )
-              $.fillForm( self.element, initial_values );
+            /** callback when submit button is clicked */
+            async function onSubmit( event ) {
 
-            /** callback when confirm button is clicked */
-            async function onConfirm() {
+              // prevent page reload
+              event.preventDefault();
+              const form = self.element.querySelector( 'form' );
+              const is_valid = form.checkValidity();
+              form.reportValidity();
+              if ( !is_valid ) return;
 
               /**
                * entered guest data
@@ -120,9 +128,9 @@
               /** checks whether the guest data is valid */
               async function isValidGuestData() {
 
-                const { email, tel } = guest_data;
+                const { name, adress, tel, email } = guest_data;
 
-                if ( !email && !tel ) return false;
+                if ( !name || ( !adress && !email && !tel ) ) return false;
 
                 // verify email
                 if ( email ) {
@@ -145,7 +153,17 @@
 
             /** callback when cancel button is clicked */
             function onCancel() {
-              renderGuestQrCode( encoded_guest_data );
+              guestView();
+            }
+
+            /** callback when delete button is clicked */
+            function onDelete() {
+
+              if ( confirm( 'Sind Sie sicher, dass Sie die Kontaktdaten löschen wollen?' ) ) {  // confirm deletion
+                sessionStorage.removeItem( 'corona-list' );                                     // delete guest data
+                guestView();                                                                    // clear input fields
+              }
+
             }
 
           }
@@ -158,14 +176,14 @@
 
             // create QR code and put it into frontend
             try {
-              const demoQRCode = qrcode( 0, 'M' );
               const url = location.href.split( '#' )[ 0 ] + '#' + encoded_quest_data;
               console.log( url );
-              demoQRCode.addData( url );
-              demoQRCode.make();
-              const qrCodeSVGTag = document.createElement( 'div' );
-              qrCodeSVGTag.innerHTML = demoQRCode.createImgTag();
-              $.setContent( self.element.querySelector( '#qrcode' ), qrCodeSVGTag.firstChild );
+              const code = qrcode( 0, 'M' );
+              code.addData( url );
+              code.make();
+              self.element.querySelector( '#qrcode' ).innerHTML = code.createSvgTag();
+              self.element.querySelector( '#qrcode svg' ).removeAttribute( 'width' );
+              self.element.querySelector( '#qrcode svg' ).removeAttribute( 'height' );
             } catch ( e ) {}
 
             /** callback when edit button is clicked */
@@ -189,11 +207,28 @@
         /** renders the restaurant owner view in the webpage area */
         function restaurantOwnerView() {
 
-          renderTable();
+          /**
+           * scanned guest data
+           * @type {Object}
+           */
+          const guest_data = JSON.parse( atob( web_url_data ) );
 
-          function renderTable() {
-            $.render( $.html( self.html.table, new Date( Date.now() ).toString(), web_url_data ), self.element );
-          }
+          /**
+           * current date and time
+           * @type {Date}
+           */
+          const timestamp = new Date( Date.now() );
+
+          // create list of all guest data (contains only one entry for now)
+          const guests_data = [ guest_data ].map( ( guest, i ) => {
+            guest.key = i + 1;
+            guest.date = timestamp.toLocaleDateString();
+            guest.time = timestamp.toLocaleTimeString();
+            return guest;
+          } );
+
+          // render HTML template that shows all scanned guest data in the webpage area of the component
+          $.render( $.html( self.html.restaurantOwnerTable, guests_data ), self.element );
 
         }
 
