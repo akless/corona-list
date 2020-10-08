@@ -83,6 +83,9 @@ export function restaurantOwnerTable( guests_data ) {
             <th scope="col">Datum</th>
             <th scope="col">Uhrzeit</th>
             <th scope="col">Name</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Email</th>
           </tr>
         </thead>
         <tbody>
@@ -92,6 +95,9 @@ export function restaurantOwnerTable( guests_data ) {
               <td>${date}</td>
               <td>${time}</td>
               <td>${name}</td>
+              <td>${adress}</td>
+              <td>${tel}</td>
+              <td>${email}</td>
             </tr>
           `) }
         </tbody>
