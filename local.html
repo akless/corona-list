@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="André Kless <andre.kless@web.de> 2020">
-<title>Corona List (local)</title>
-
-<script src="./ccm.corona_list.js"></script>
-<ccm-corona_list key='["ccm.get","./resources/resources.js","local"]'></ccm-corona_list>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="André Kless <andre.kless@web.de> 2020">
+    <title>Corona List (local)</title>
+    <style>html, body, ccm-corona_list > div { height: 100%; } body { margin: 0; }</style>
+    <script src="./ccm.corona_list.js"></script>
+  </head>
+  <body>
+    <ccm-corona_list key='["ccm.get","./resources/resources.js","local"]'></ccm-corona_list>
+  </body>
+</html>

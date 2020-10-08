@@ -60,9 +60,11 @@ export function guestForm( onSubmit, onCancel, onDelete, initial_values = {} ) {
  */
 export function guestQrCode( onEdit ) {
   return html`
-    <div id="qrcode"></div>
-    <div id="button">
-      <button type="button" class="btn btn-primary text-nowrap" @click="${onEdit}">Kontaktdaten editieren</button>
+    <div id="guest_qrcode">
+      <div id="qrcode"></div>
+      <div id="button">
+        <button type="button" class="btn btn-primary text-nowrap" @click="${onEdit}">Kontaktdaten editieren</button>
+      </div>
     </div>
   `;
 }
