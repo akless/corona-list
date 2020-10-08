@@ -3,7 +3,7 @@
  * @author André Kless <andre.kless@web.de> 2020
  * @version latest (1.0.0)
  * @changes
- * version 1.0.0 (06.10.2020)
+ * version 1.0.0 (08.10.2020)
  */
 
 // immediate invoked function expression (IIFE) to encapsulate inner local variables
@@ -39,6 +39,7 @@
         { "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css" },
         { "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css", "context": "head" }
       ],
+      "store": [ "ccm.store", { "name": "corona-list" } ],                                                        // offline datastore for saved guests data
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-6.0.0.mjs" ],    // useful help functions
       "qr_code": [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]  // JavaScript library for creating QR codes
     },
@@ -72,21 +73,23 @@
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
         /**
-         * encoded guest data from web URL (if any exists)
+         * received encoded guest data from web URL (if any exists)
          * @type {string}
          */
-        const web_url_data = location.href.split( '#' )[ 1 ];
+        const received_guest_data = location.href.split( '#' )[ 1 ];
 
-        if ( web_url_data )      // has encoded guest data from web URL?
-          restaurantOwnerView()  // => render restaurant owner view
-        else                     // otherwise:
-          guestView();           // => render guest view
+        if ( received_guest_data )            // has received guest data?
+          renderReceivedGuestData();          // => show it
+        else if ( await this.store.count() )  // has already saved guests data?
+          renderGuestsList();                 // => show it
+        else                                  // otherwise:
+          guestView();                        // => show guest view
 
-        /** renders the guest view in the webpage area */
+        /** renders the guest view in the webpage area of the component */
         function guestView() {
 
-          // get already existing encoded guest data from Session Storage (if any exists)
-          const encoded_guest_data = sessionStorage.getItem( 'corona-list' );
+          // get already existing encoded guest data from Local Storage (if any exists)
+          const encoded_guest_data = localStorage.getItem( 'corona-list' );
 
           if ( encoded_guest_data )                   // has encoded guest data?
             renderGuestQrCode( encoded_guest_data );  // => show QR code
@@ -122,7 +125,7 @@
               if ( !( await isValidGuestData() ) ) return;
 
               const encoded_guest_data = btoa( JSON.stringify( guest_data ) );  // encode guest data
-              sessionStorage.setItem( 'corona-list', encoded_guest_data )       // save encoded guest data in Session Storage
+              localStorage.setItem( 'corona-list', encoded_guest_data )         // save encoded guest data in Local Storage
               renderGuestQrCode( encoded_guest_data );                          // render QR code of the guest for restaurant owner
 
               /** checks whether the guest data is valid */
@@ -160,7 +163,7 @@
             function onDelete() {
 
               if ( confirm( 'Sind Sie sicher, dass Sie die Kontaktdaten löschen wollen?' ) ) {  // confirm deletion
-                sessionStorage.removeItem( 'corona-list' );                                     // delete guest data
+                localStorage.removeItem( 'corona-list' );                                       // delete guest data in Local Storage
                 guestView();                                                                    // clear input fields
               }
 
@@ -204,14 +207,14 @@
 
         }
 
-        /** renders the restaurant owner view in the webpage area */
-        function restaurantOwnerView() {
+        /** renders the received guest data in the webpage area of the component */
+        async function renderReceivedGuestData() {
 
           /**
-           * scanned guest data
+           * decoded received guest data
            * @type {Object}
            */
-          const guest_data = JSON.parse( atob( web_url_data ) );
+          const guest_data = JSON.parse( atob( received_guest_data ) );
 
           /**
            * current date and time
@@ -219,16 +222,44 @@
            */
           const timestamp = new Date( Date.now() );
 
-          // create list of all guest data (contains only one entry for now)
-          const guests_data = [ guest_data ].map( ( guest, i ) => {
-            guest.key = i + 1;
-            guest.date = timestamp.toLocaleDateString();
-            guest.time = timestamp.toLocaleTimeString();
-            return guest;
-          } );
+          // expand received guest data
+          guest_data.key = await self.store.count() + 1;     // add unique key
+          guest_data.date = timestamp.toLocaleDateString();  // add date
+          guest_data.time = timestamp.toLocaleTimeString();  // add time
 
-          // render HTML template that shows all scanned guest data in the webpage area of the component
-          $.render( $.html( self.html.restaurantOwnerTable, guests_data ), self.element );
+          // render HTML template that shows the received guest data in the webpage area of the component
+          $.render( $.html( self.html.guestData, onSave, onDiscard, guest_data ), self.element );
+
+          /** callback when save button is clicked */
+          async function onSave() {
+            await self.store.set( guest_data );                        // save guest data in IndexedDB
+            window.location = window.location.href.split( '#' )[ 0 ];  // remove encoded guest data from web URL (restarts the app)
+          }
+
+          /** callback when discard button is clicked */
+          function onDiscard() {
+            if ( confirm( "Sind Sie sicher, dass Sie die empfangenen Daten verwerfen wollen?" ) )
+              window.location = window.location.href.split( '#' )[ 0 ];  // remove encoded guest data from web URL (restarts the app)
+          }
+
+        }
+
+        /** renders the list of all already saved guests data */
+        async function renderGuestsList() {
+
+          /**
+           * all already saved guests data from the offline datastore
+           * @type {Object[]}
+           */
+          const guests_data = await self.store.get();
+
+          // render HTML template that shows all already saved guests data in the webpage area of the component
+          $.render( $.html( self.html.guestsList, onGuestMode, guests_data ), self.element );
+
+          /** callback when button for guest mode is clicked */
+          function onGuestMode() {
+            guestView();
+          }
 
         }
 

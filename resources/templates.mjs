@@ -70,14 +70,63 @@ export function guestQrCode( onEdit ) {
 }
 
 /**
- * return the HTML template that shows all scanned guest data
- * @param {Object[]} guests_data - all scanned guest data
- * @returns {TemplateResult} HTML template that shows all scanned guest data
+ * returns the HTML template for showing scanned guest data
+ * @param {function} onSave - callback when save button is clicked
+ * @param {function} onDiscard - callback when discard button is clicked
+ * @param {Object} [guest_data={}] - scanned gust data
+ * @returns {TemplateResult} HTML template for showing scanned guest data
  */
-export function restaurantOwnerTable( guests_data ) {
+export function guestData( onSave, onDiscard, guest_data = {} ) {
+  const { date, time, name, adress, tel, email } = guest_data;
   return html`
     <div class="container">
-      <h1>Liste der gescannten Kontaktdaten</h1>
+      <h1>Empfangene Daten:</h1>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Datum:</th>
+            <td>${date}</td>
+          </tr>
+          <tr>
+            <th scope="row">Uhrzeit:</th>
+            <td>${time}</td>
+          </tr>
+          <tr>
+            <th scope="row">Name:</th>
+            <td>${name}</td>
+          </tr>
+          <tr>
+            <th scope="row">Adresse:</th>
+            <td>${adress}</td>
+          </tr>
+          <tr>
+            <th scope="row">Telefon:</th>
+            <td>${tel}</td>
+          </tr>
+          <tr>
+            <th scope="row">Email:</th>
+            <td>${email}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="buttons">
+        <button type="button" class="btn btn-primary text-nowrap" @click="${onSave}">Speichern</button>
+        <button type="button" class="btn btn-danger text-nowrap" @click="${onDiscard}">Verwerfen</button>
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * return the HTML template that shows all already saved guests data
+ * @param {function} onGuestMode - callback when button for guest mode is clicked
+ * @param {Object[]} guests_data - all already saved guests data
+ * @returns {TemplateResult} HTML template that shows all already saved guests data
+ */
+export function guestsList( onGuestMode, guests_data ) {
+  return html`
+    <div class="container">
+      <h1>Liste aller Kontaktdaten</h1>
       <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
@@ -104,6 +153,9 @@ export function restaurantOwnerTable( guests_data ) {
           `) }
         </tbody>
       </table>
+      <div>
+        <button type="button" class="btn btn-success text-nowrap" @click="${onGuestMode}">Gastmodus</button>
+      </div>
     </div>
   `;
 }

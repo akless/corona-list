@@ -21,15 +21,25 @@
   margin-bottom: 1em;
 }
 
-svg {
-  width: 90vmin;
-  height: 90vmin;
+#buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 h1 {
   padding: 0.2em 0;
 }
 
-*[data-hidden] {
+td, th {
+  font-size: small;
+  white-space: nowrap;
+}
+
+svg {
+  width: 90vmin;
+  height: 90vmin;
+}
+
+[data-hidden] {
   visibility: hidden;
 }
