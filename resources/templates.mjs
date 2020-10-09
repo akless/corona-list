@@ -46,7 +46,7 @@ export function guestForm( onSubmit, onCancel, onDelete, initial_values = {} ) {
         <div class="form-group">
           <button type="submit" class="btn btn-primary text-nowrap" @click=${onSubmit} title="Speichert die Kontaktdaten lokal auf diesem Gerät und erstellt den QR-Code.">Speichern</button>
           <button type="button" class="btn btn-secondary text-nowrap" @click="${onCancel}" ?data-hidden=${!has_initial_values} title="Abbrechen ohne Speichern und zum bisherigen QR-Code zurückkehren.">Abbrechen</button>
-          <button type="button" class="btn btn-danger text-nowrap" @click="${onDelete}" ?data-hidden=${!has_initial_values} title="Löscht die Kontaktdaten von diesem Gerät. Für einen QR-Code müssen erst erneut wieder Kontaktdaten eingegeben werden.">Kontaktdaten löschen</button>
+          <button type="button" class="btn btn-danger text-nowrap" @click="${onDelete}" ?data-hidden=${!has_initial_values} title="Löscht die Kontaktdaten von diesem Gerät. Für einen QR-Code müssen erst erneut wieder Kontaktdaten eingegeben werden.">Löschen</button>
         </div>
       </form>
     </div>
@@ -109,7 +109,7 @@ export function guestData( onSave, onDiscard, guest_data = {} ) {
           </tr>
         </tbody>
       </table>
-      <div id="buttons">
+      <div>
         <button type="button" class="btn btn-primary text-nowrap" @click="${onSave}">Speichern</button>
         <button type="button" class="btn btn-danger text-nowrap" @click="${onDiscard}">Verwerfen</button>
       </div>
