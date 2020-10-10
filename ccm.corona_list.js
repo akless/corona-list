@@ -175,7 +175,7 @@
           function renderGuestQrCode( encoded_quest_data ) {
 
             // render HTML template for the QR code of the guest in the webpage area of the component
-            $.render( $.html( self.html.guestQrCode, onEdit ), self.element );
+            $.render( $.html( self.html.qrCode, 'Kontaktdaten editieren', onEdit ), self.element );
 
             // render QR code to share the app
             renderQrCode( location.href.split( '#' )[ 0 ] + '#' + encoded_quest_data );
@@ -245,15 +245,25 @@
           const guests_data = await self.store.get();
 
           // render HTML template that shows all already saved guests data in the webpage area of the component
-          $.render( $.html( self.html.guestsList, guests_data, onDelete, onGuestMode, onShareApp, onDeleteAll ), self.element );
+          $.render( $.html( self.html.guestsList, guests_data, onDelete, onPrint, onShareApp, onGuestMode, onDeleteAll ), self.element );
 
           /**
            * callback when delete button is clicked
            * @param {string} key - unique key of the corresponding guest data
            */
           async function onDelete( key ) {
+
+            // make sure that this operation is really wanted
+            if ( !confirm( 'Sind Sie sicher, dass Sie den Datensatz unwideruflich löschen wollen?' ) ) return;
+
             await self.store.del( key );  // delete guest data in IndexedDB
             await self.start();           // restart app (updates table)
+
+          }
+
+          /** callback when print button is clicked */
+          function onPrint() {
+            window.print();
           }
 
           /** callback when button for guest mode is clicked */
@@ -265,7 +275,7 @@
           function onShareApp() {
 
             // render HTML template for the QR code to share the app in the webpage area of the component
-            $.render( $.html( self.html.shareQrCode ), self.element );
+            $.render( $.html( self.html.qrCode, 'Zurück', renderGuestsList ), self.element );
 
             // render QR code to share the app
             renderQrCode( location.href.split( '#' )[ 0 ] );
