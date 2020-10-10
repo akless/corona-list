@@ -177,17 +177,8 @@
             // render HTML template for the QR code of the guest in the webpage area of the component
             $.render( $.html( self.html.guestQrCode, onEdit ), self.element );
 
-            // create QR code and put it into frontend
-            try {
-              const url = location.href.split( '#' )[ 0 ] + '#' + encoded_quest_data;
-              console.log( url );
-              const code = qrcode( 0, 'M' );
-              code.addData( url );
-              code.make();
-              self.element.querySelector( '#qrcode' ).innerHTML = code.createSvgTag();
-              self.element.querySelector( '#qrcode svg' ).removeAttribute( 'width' );
-              self.element.querySelector( '#qrcode svg' ).removeAttribute( 'height' );
-            } catch ( e ) {}
+            // render QR code to share the app
+            renderQrCode( location.href.split( '#' )[ 0 ] + '#' + encoded_quest_data );
 
             /** callback when edit button is clicked */
             function onEdit() {
@@ -248,18 +239,70 @@
         async function renderGuestsList() {
 
           /**
-           * all already saved guests data from the offline datastore
+           * all already saved guests data from IndexedDB
            * @type {Object[]}
            */
           const guests_data = await self.store.get();
 
           // render HTML template that shows all already saved guests data in the webpage area of the component
-          $.render( $.html( self.html.guestsList, onGuestMode, guests_data ), self.element );
+          $.render( $.html( self.html.guestsList, guests_data, onDelete, onGuestMode, onShareApp, onDeleteAll ), self.element );
+
+          /**
+           * callback when delete button is clicked
+           * @param {string} key - unique key of the corresponding guest data
+           */
+          async function onDelete( key ) {
+            await self.store.del( key );  // delete guest data in IndexedDB
+            await self.start();           // restart app (updates table)
+          }
 
           /** callback when button for guest mode is clicked */
           function onGuestMode() {
             guestView();
           }
+
+          /** callback when share button is clicked */
+          function onShareApp() {
+
+            // render HTML template for the QR code to share the app in the webpage area of the component
+            $.render( $.html( self.html.shareQrCode ), self.element );
+
+            // render QR code to share the app
+            renderQrCode( location.href.split( '#' )[ 0 ] );
+
+          }
+
+          /** callback when 'delete all' button is clicked */
+          async function onDeleteAll() {
+
+            // make sure that this operation is really wanted
+            if ( !confirm( 'Sind Sie sicher, dass Sie alle Kontaktdaten unwideruflich löschen wollen?' ) ) return;
+
+            for ( let i = 0; i < guests_data.length; i++ )       // for each guest data:
+              await self.store.del( guests_data[ i ].key );      // => delete guest data in IndexedDB
+            alert( 'Alle Kontaktdaten erfolgreich gelöscht!' );  // show success message
+            await self.start();                                  // restart app
+
+          }
+
+        }
+
+        /**
+         * renders a QR code
+         * @param {string} url - web adress that opens when QR code is scanned
+         */
+        function renderQrCode( url ) {
+          console.log( url );
+
+          // create QR code and put it into frontend
+          try {
+            const code = qrcode( 0, 'M' );
+            code.addData( url );
+            code.make();
+            self.element.querySelector( '#qrcode' ).innerHTML = code.createSvgTag();
+            self.element.querySelector( '#qrcode svg' ).removeAttribute( 'width' );
+            self.element.querySelector( '#qrcode svg' ).removeAttribute( 'height' );
+          } catch ( e ) {}
 
         }
 

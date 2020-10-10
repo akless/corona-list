@@ -119,43 +119,74 @@ export function guestData( onSave, onDiscard, guest_data = {} ) {
 
 /**
  * return the HTML template that shows all already saved guests data
- * @param {function} onGuestMode - callback when button for guest mode is clicked
  * @param {Object[]} guests_data - all already saved guests data
+ * @param {function} onDelete - callback when delete button is clicked
+ * @param {function} onGuestMode - callback when button for guest mode is clicked
+ * @param {function} onShareApp - callback when share button is clicked
+ * @param {function} onDeleteAll - callback when 'delete all' button is clicked
  * @returns {TemplateResult} HTML template that shows all already saved guests data
  */
-export function guestsList( onGuestMode, guests_data ) {
+export function guestsList( guests_data, onDelete, onGuestMode, onShareApp, onDeleteAll ) {
   return html`
     <div class="container">
-      <h1>Liste aller Kontaktdaten</h1>
-      <table class="table table-striped table-bordered table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Datum</th>
-            <th scope="col">Uhrzeit</th>
-            <th scope="col">Name</th>
-            <th scope="col">Adresse</th>
-            <th scope="col">Telefon</th>
-            <th scope="col">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${ repeat( guests_data, guest => guest.key, ( { key, date, time, name, adress, tel, email } ) => html`
+      <header>
+        <h1>Liste aller Kontaktdaten</h1>
+      </header>
+      <main>
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
             <tr>
-              <th scope="row">${key}</th>
-              <td>${date}</td>
-              <td>${time}</td>
-              <td>${name}</td>
-              <td>${adress}</td>
-              <td>${tel}</td>
-              <td>${email}</td>
+              <th scope="col">#</th>
+              <th scope="col">Datum</th>
+              <th scope="col">Uhrzeit</th>
+              <th scope="col">Name</th>
+              <th scope="col">Adresse</th>
+              <th scope="col">Telefon</th>
+              <th scope="col">Email</th>
+              <th scope="col"></th>
             </tr>
-          `) }
-        </tbody>
-      </table>
-      <div>
-        <button type="button" class="btn btn-success text-nowrap" @click="${onGuestMode}">Gastmodus</button>
-      </div>
+          </thead>
+          <tbody>
+            ${ repeat( guests_data, guest => guest.key, ( { key, date, time, name, adress, tel, email } ) => html`
+              <tr>
+                <th scope="row">${key}</th>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${name}</td>
+                <td>${adress}</td>
+                <td>${tel}</td>
+                <td>${email}</td>
+                <td>
+                  <button type="button" class="btn btn-xs btn-danger text-nowrap" @click="${()=>onDelete(key)}">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash icon text-color-primary" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            `) }
+          </tbody>
+        </table>
+      </main>
+      <footer>
+        <nav>
+          <button type="button" class="btn btn-success text-nowrap" @click="${onGuestMode}">Gastmodus</button>
+          <button type="button" class="btn btn-secondary text-nowrap" @click="${onShareApp}">Share App</button>
+          <button type="button" class="btn btn-danger text-nowrap" @click="${onDeleteAll}">Alles löschen</button>
+        </nav>
+      </footer>
+    </div>
+  `;
+}
+
+/**
+ * returns the HTML template for the QR code to share the app
+ * @returns {TemplateResult} HTML template for the QR code of the guest
+ */
+export function shareQrCode() {
+  return html`
+    <div id="share_qrcode">
+      <div id="qrcode"></div>
     </div>
   `;
 }
