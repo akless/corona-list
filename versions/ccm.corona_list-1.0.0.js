@@ -1,7 +1,7 @@
 /**
  * @overview <i>ccmjs</i>-based web component for corona list
  * @author André Kless <andre.kless@web.de> 2020
- * @version latest (1.0.0)
+ * @version 1.0.0
  * @changes
  * version 1.0.0 (10.10.2020)
  */
@@ -20,6 +20,12 @@
      * @type {string}
      */
     name: 'corona_list',
+
+    /**
+     * component version
+     * @type {number[]}
+     */
+    version: [ 1, 0, 0 ],
 
     /**
      * default used version of the <i>ccmjs</i> web technology
