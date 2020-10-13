@@ -63,14 +63,26 @@
       const self = this;
 
       /**
+       * is called once before the app is started for the first time
+       * @function
+       * @returns {Promise<void>}
+       */
+      this.ready = async function () {
+
+        // set shortcut to help functions
+        $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
+
+        // listen to hash change event => restart app
+        window.addEventListener( 'hashchange', this.start );
+
+      };
+
+      /**
        * called when the app is started
        * @function
        * @returns {Promise<void>}
        */
       this.start = async function () {
-
-        // set shortcut to help functions
-        $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
         /**
          * received encoded guest data from web URL (if any exists)
