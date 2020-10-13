@@ -12,7 +12,7 @@ ccm.files[ 'resources.js' ] = {
     "qr_code": [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.js" ]
   },
 
-  /** demo configuration (absolute paths) */
-  "demo": {}
+  /** live configuration (absolute paths) */
+  "live": {}
 
 };
