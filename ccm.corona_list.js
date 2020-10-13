@@ -7,7 +7,7 @@
  */
 
 // immediate invoked function expression (IIFE) to encapsulate inner local variables
-( () => {
+( function () {
 
   /**
    * object that defines the component
@@ -67,7 +67,7 @@
        * @function
        * @returns {Promise<void>}
        */
-      this.start = async () => {
+      this.start = async function () {
 
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );

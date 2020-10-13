@@ -7,7 +7,7 @@
  */
 
 // immediate invoked function expression (IIFE) to encapsulate inner local variables
-( () => {
+( function () {
 
   /**
    * object that defines the component
@@ -20,12 +20,6 @@
      * @type {string}
      */
     name: 'corona_list',
-
-    /**
-     * component version
-     * @type {number[]}
-     */
-    version: [ 1, 0, 0 ],
 
     /**
      * default used version of the <i>ccmjs</i> web technology
@@ -73,7 +67,7 @@
        * @function
        * @returns {Promise<void>}
        */
-      this.start = async () => {
+      this.start = async function () {
 
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
