@@ -22,6 +22,12 @@
     name: 'corona_list',
 
     /**
+     * component version
+     * @type {number[]}
+     */
+    version: [ 1, 0, 0 ],
+
+    /**
      * default used version of the <i>ccmjs</i> web technology
      * @type {string}
      */
