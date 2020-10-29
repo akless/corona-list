@@ -12,13 +12,17 @@ import {repeat} from 'https://unpkg.com/lit-html/directives/repeat.js';
  * @param {function} onCancel - callback when cancel button is clicked
  * @param {function} onDelete - callback when delete button is clicked
  * @param {Object} [initial_values] - initial values for input fields
+ * @param {string} back_caption - caption of the back button
+ * @param {function} onBack - callback when back button is clicked
+ * @param {boolean} [has_list] - has scanned contact data
  * @returns {TemplateResult} HTML template for entering guest data
  */
-export function guestForm( onSubmit, onCancel, onDelete, initial_values = {} ) {
+export function guestForm( onSubmit, onCancel, onDelete, initial_values = {}, back_caption, onBack, has_list ) {
   const { name, adress, tel, email } = initial_values;
   const has_initial_values = !!Object.keys( initial_values ).length;
   return html`
     <div class="container">
+      <button type="button" id="back" class="btn btn-secondary btn-sm text-no-wrap" @click="${onBack}" ?data-hidden=${!has_list}>${back_caption}</button>
       <header>
         <h1>Kontaktdaten</h1>
       </header>
@@ -59,16 +63,20 @@ export function guestForm( onSubmit, onCancel, onDelete, initial_values = {} ) {
 
 /**
  * returns the HTML template for the QR code
- * @param {string} caption - caption of the button below the QR code
- * @param {function} onClick - callback when button is clicked
+ * @param {string} edit_caption - caption of the edit button
+ * @param {function} onEdit - callback when edit button is clicked
+ * @param {string} back_caption - caption of the back button
+ * @param {function} onBack - callback when back button is clicked
+ * @param {boolean} [has_list] - has scanned contact data
  * @returns {TemplateResult} HTML template for the QR code of the guest
  */
-export function qrCode( caption, onClick ) {
+export function qrCode( edit_caption, onEdit, back_caption, onBack, has_list ) {
   return html`
     <div id="guest_qrcode">
+      <button type="button" id="back" class="btn btn-secondary btn-sm text-no-wrap" @click="${onBack}" ?data-hidden=${!has_list}>${back_caption}</button>
       <main id="qrcode"></main>
       <nav id="button">
-        <button type="button" class="btn btn-primary text-nowrap" @click="${onClick}">${caption}</button>
+        <button type="button" class="btn btn-primary text-nowrap" @click="${onEdit}">${edit_caption}</button>
       </nav>
     </div>
   `;

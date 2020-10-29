@@ -18,6 +18,10 @@
   margin-bottom: 1em;
 }
 
+#back {
+  align-self: flex-start;
+}
+
 .btn-xs {
   padding: .25rem .4rem !important;
   font-size: .875rem !important;
