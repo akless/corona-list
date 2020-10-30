@@ -197,7 +197,7 @@
             $.render( $.html( self.html.qrCode, 'Kontaktdaten editieren', onEdit, 'Zurück zur Liste', onBack, has_contacts ), self.element );
 
             // render QR code to share the app
-            renderQrCode( location.origin + location.pathname + '?contact=' + encoded_quest_data );
+            renderQrCode( location.origin + location.pathname + '?contact=' + encodeURIComponent( encoded_quest_data ) );
 
             /** callback when edit button is clicked */
             function onEdit() {
@@ -229,7 +229,7 @@
            * decoded received guest data
            * @type {Object}
            */
-          const guest_data = JSON.parse( atob( received_guest_data ) );
+          const guest_data = JSON.parse( atob( decodeURIComponent( received_guest_data ) ) );
 
           /**
            * current date and time
