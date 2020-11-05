@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title>Landing Page | Corona List</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 
     <!--
     <style>
@@ -24,40 +24,40 @@
 
 
     <!-- Navigation -->
-    <nav class = "navbar navbar-expand-md navbar-light bg-light sticky-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/logo.png"></a>
-        <!--     <img alt="Logo der Corona Liste" src="img/logo.png" width="30" class="mr-1">  -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div class="collapse navbar-collapse" id="navbarResponsive">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+      <a class="navbar-brand" href="#">Corona Kontakt-Liste</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">Link</a>
           </li>
+          
           <li class="nav-item">
-            <a class="nav-link" href="#">Solar</a>
+            <a class="nav-link disabled" href="#">Solar</a>
           </li>
         </ul>
-
-
       </div>
     </nav>
 
 
+
+
     <!-- Welcome Section -->
-    <div class="container-fluid padding">
+    <div class="container-fluid p-5">
       <div class="row welcome text-center">
         <div class="col-12">
           <h1 class="display-4">Corona Kontakt-Liste</h1>
         </div>
         <hr>
         <div class="col-12">
-          <p class="lead">Willkommen zur Corona Kontakt-Liste! Wir wollen das merken der Kontakte bzw. Besuche in Restaurants so einfach wie möglich machen UND sicher.</p>
+          <p class="lead">Willkommen zur Corona Kontakt-Liste! Wir wollen das Erinnern Ihrer Kontakte bzw. Besuche in Restaurants so einfach wie möglich machen UND sicher.</p>
         </div>
       </div>
     </div>
@@ -65,14 +65,15 @@
 
 
     <!-- Two Column Section -->
-    <div class="container-fluid padding">
-      <div class="row padding">
-        <div class="col-lg-6">
+    <div class="container mb-1">
+      <div class="row jumbotron">
+        <div class="col">
           <h2>So funktioniert es:</h2>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/aqz-KE-bpKQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/aqz-KE-bpKQ" frameborder="0" width="560" height="315" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
         </div>
-        <div class="col-lg-6">
-          <br>
+        <div class="col pt-5 lead">
           <p>Protokolliere Deine eigenen Kontakte!</p>
           <p>Umweltschutz: Weniger Papier!</p>
           <p>!!! Sonstiger Mehrwert und Vorteile !!!!!!!!!!!!!!</p>
@@ -85,10 +86,10 @@
     <!-- List Section: Vorteile -->
     <!--<a class="btn btn-primary btn-lg" href="https://akless.github.io/corona-list/" role="button">Go to App</a>
     <button class="list" data-toggle="collapse" data-target="#benefits">Vorteile der Corona Kontakt-Liste</button> -->
+    <div class="container mb-3">
     <button class="list-button btn btn-primary btn-block" data-toggle="collapse" data-target="#benefits">Vorteile der Corona Kontakt-Liste</button>
-    
     <div id="benefits" class="collapse">
-      <div class="container-fluid padding">
+      <div class="container-fluid">
         <div class="row text-center">
           <ul class="list-group">
             <!--<li class="list-group-item active">Überschrift oder Highlight</li> -->
@@ -96,16 +97,16 @@
             <li class="list-group-item">Alles lokal: Keine Server-Kommunikation! Die Daten verbeiben auf dem Gerät des Gastwirtes.</li>
             <li class="list-group-item">Sicherheit: Gäste sehen nicht die Kontaktdaten anderer Gäste.</li>
           </ul>
-
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Future Benefits: 2021-->
+    <div class="container mb-3">
     <button class="list-button btn btn-info btn-block" data-toggle="collapse" data-target="#benefits2">Zukünftige Funktionen ab 2021</button>
-    
     <div id="benefits2" class="collapse">
-      <div class="container-fluid padding">
+      <div class="container-fluid">
         <div class="row text-center">
           <ul class="list-group">
             <!--<li class="list-group-item active">Überschrift oder Highlight</li> -->
@@ -113,27 +114,27 @@
             <li class="list-group-item">Verschlüsselung: Auch der Gastwirt kennt Deine Adresse nicht: Nur das Amt hat den Hauptschlüssel und kann Dich somit kontaktieren.</li>
             <li class="list-group-item">Daten werden gelöscht: Nach 4 Wochen werden die Daten gelöscht!</li>  
           </ul>
-
+        </div>
         </div>
       </div>
     </div>
-    
 
     <!-- Future Benefits for Restaurants: 2021-->
+    <div class="container mb-3">
     <button class="list-button btn btn-success btn-block" data-toggle="collapse" data-target="#benefits3">Zukünftige Funktionen für Restaurants ab 2021</button>
-    
     <div id="benefits3" class="collapse">
-      <div class="container-fluid padding">
+      <div class="container-fluid">
         <div class="row text-center">
           <ul class="list-group">
             <!--<li class="list-group-item active">Überschrift oder Highlight</li> -->
             <li class="list-group-item">Eigenes Branding: Wir stellen die Möglichkeit bereit, dass ein Restaurant sein eigenes Branding nutzen kann.</li>
             <li class="list-group-item">Werbung schalten: Falls der Kunde dies wünscht, gibt es die Möglichkeit, dass er vom Restaurant Infos oder Angebote erhält, z.B. auch zum Mitnehmen.</li>
           </ul>
-
+        </div>
         </div>
       </div>
     </div>
+  
 
 
 
@@ -170,7 +171,8 @@
 
 
         <!-- Start to input your data with the QR-Code -->  
-        <h1>QR-Code: Gib Deine Daten ein...</h1>
+        <div class="container d-flex flex-column align-items-center">
+        <h1>Kamera öffnen und Daten eingeben - fertig.</h1>
 
 
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 74" preserveAspectRatio="xMinYMin meet"><rect width="100%" height="100%" fill="white" cx="0" cy="0"></rect><path d="M8,8l2,0 0,2 -2,0 0,-2z M10,8l2,0 0,2 -2,0 0,-2z M12,8l2,0 0,2 -2,0 0,-2z M14,8l2,0 0,2 -2,0 0,-2z M16,8l2,0 0,2 -2,0 0,-2z M18,8l2,0 0,2 -2,0 0,-2z M20,8l2,0 0,2 -2,0 0,-2z M32,8l2,0 0,2 -2,0 0,-2z M34,8l2,0 0,2 -2,0 0,-2z M36,8l2,0 0,2 -2,0 0,-2z M38,8l2,0 0,2 -2,0 0,-2z M40,8l2,0 0,2 -2,0 0,-2z M42,8l2,0 0,2 -2,0 0,-2z M44,8l2,0 0,2 -2,0 0,-2z M46,8l2,0 0,2 -2,0 0,-2z M52,8l2,0 0,2 -2,0 0,-2z M54,8l2,0 0,2 -2,0 0,-2z M56,8l2,0 0,2 -2,0 0,-2z M58,8l2,0 0,2 -2,0 0,-2z M60,8l2,0 0,2 -2,0 0,-2z M62,8l2,0 0,2 -2,0 0,-2z M64,8l2,0 0,2 -2,0 0,-2z M8,10l2,0 0,2 -2,0 0,-2z M20,10l2,0 0,2 -2,0 0,-2z M28,10l2,0 0,2 -2,0 0,-2z M32,10l2,0 0,2 -2,0 0,-2z M34,10l2,0 0,2 -2,0 0,-2z M36,10l2,0 0,2 -2,0 0,-2z M38,10l2,0 0,2 -2,0 0,-2z M40,10l2,0 0,2 -2,0 0,-2z M42,10l2,0 0,2 -2,0 0,-2z M52,10l2,0 0,2 -2,0 0,-2z M64,10l2,0 0,2 -2,0 0,-2z M8,12l2,0 0,2 -2,0 0,-2z M12,12l2,0 0,2 -2,0 0,-2z M14,12l2,0 0,2 -2,0 0,-2z M16,12l2,0 0,2 -2,0 0,-2z M20,12l2,0 0,2 -2,0 0,-2z M26,12l2,0 0,2 -2,0 0,-2z M36,12l2,0 0,2 -2,0 0,-2z M42,12l2,0 0,2 -2,0 0,-2z M46,12l2,0 0,2 -2,0 0,-2z M48,12l2,0 0,2 -2,0 0,-2z M52,12l2,0 0,2 -2,0 0,-2z M56,12l2,0 0,2 -2,0 0,-2z M58,12l2,0 0,2 -2,0 0,-2z M60,12l2,0 0,2 -2,0 0,-2z M64,12l2,0 0,2 -2,0 0,-2z M8,14l2,0 0,2 -2,0 0,-2z M12,14l2,0 0,2 -2,0 0,-2z M14,14l2,0 0,2 -2,0 0,-2z M16,14l2,0 0,2 -2,0 0,-2z M20,14l2,0 0,2 -2,0 0,-2z M26,14l2,0 0,2 -2,0 0,-2z M32,14l2,0 0,2 -2,0 0,-2z M34,14l2,0 0,2 -2,0 0,-2z M38,14l2,0 0,2 -2,0 0,-2z M40,14l2,0 0,2 -2,0 0,-2z M44,14l2,0 0,2 -2,0 0,-2z M52,14l2,0 0,2 -2,0 0,-2z M56,14l2,0 0,2 -2,0 0,-2z M58,14l2,0 0,2 -2,0 0,-2z M60,14l2,0 0,2 -2,0 0,-2z M64,14l2,0 0,2 -2,0 0,-2z M8,16l2,0 0,2 -2,0 0,-2z M12,16l2,0 0,2 -2,0 0,-2z M14,16l2,0 0,2 -2,0 0,-2z M16,16l2,0 0,2 -2,0 0,-2z M20,16l2,0 0,2 -2,0 0,-2z M32,16l2,0 0,2 -2,0 0,-2z M36,16l2,0 0,2 -2,0 0,-2z M38,16l2,0 0,2 -2,0 0,-2z M40,16l2,0 0,2 -2,0 0,-2z M42,16l2,0 0,2 -2,0 0,-2z M44,16l2,0 0,2 -2,0 0,-2z M48,16l2,0 0,2 -2,0 0,-2z M52,16l2,0 0,2 -2,0 0,-2z M56,16l2,0 0,2 -2,0 0,-2z M58,16l2,0 0,2 -2,0 0,-2z M60,16l2,0 0,2 -2,0 0,-2z M64,16l2,0 0,2 -2,0 0,-2z M8,18l2,0 0,2 -2,0 0,-2z M20,18l2,0 0,2 -2,0 0,-2z M24,18l2,0 0,2 -2,0 0,-2z M26,18l2,0 0,2 -2,0 0,-2z M28,18l2,0 0,2 -2,0 0,-2z M38,18l2,0 0,2 -2,0 0,-2z M40,18l2,0 0,2 -2,0 0,-2z M42,18l2,0 0,2 -2,0 0,-2z M44,18l2,0 0,2 -2,0 0,-2z M46,18l2,0 0,2 -2,0 0,-2z M48,18l2,0 0,2 -2,0 0,-2z M52,18l2,0 0,2 -2,0 0,-2z M64,18l2,0 0,2 -2,0 0,-2z M8,20l2,0 0,2 -2,0 0,-2z M10,20l2,0 0,2 -2,0 0,-2z M12,20l2,0 0,2 -2,0 0,-2z M14,20l2,0 0,2 -2,0 0,-2z M16,20l2,0 0,2 -2,0 0,-2z M18,20l2,0 0,2 -2,0 0,-2z M20,20l2,0 0,2 -2,0 0,-2z M24,20l2,0 0,2 -2,0 0,-2z M28,20l2,0 0,2 -2,0 0,-2z M32,20l2,0 0,2 -2,0 0,-2z M36,20l2,0 0,2 -2,0 0,-2z M40,20l2,0 0,2 -2,0 0,-2z M44,20l2,0 0,2 -2,0 0,-2z M48,20l2,0 0,2 -2,0 0,-2z M52,20l2,0 0,2 -2,0 0,-2z M54,20l2,0 0,2 -2,0 0,-2z M56,20l2,0 0,2 -2,0 0,-2z M58,20l2,0 0,2 -2,0 0,-2z M60,20l2,0 0,2 -2,0 0,-2z M62,20l2,0 0,2 -2,0 0,-2z M64,20l2,0 0,2 -2,0 0,-2z M26,22l2,0 0,2 -2,0 0,-2z M28,22l2,0 0,2 -2,0 0,-2z M32,22l2,0 0,2 -2,0 0,-2z M34,22l2,0 0,2 -2,0 0,-2z M40,22l2,0 0,2 -2,0 0,-2z M42,22l2,0 0,2 -2,0 0,-2z M44,22l2,0 0,2 -2,0 0,-2z M46,22l2,0 0,2 -2,0 0,-2z M8,24l2,0 0,2 -2,0 0,-2z M14,24l2,0 0,2 -2,0 0,-2z M18,24l2,0 0,2 -2,0 0,-2z M20,24l2,0 0,2 -2,0 0,-2z M24,24l2,0 0,2 -2,0 0,-2z M26,24l2,0 0,2 -2,0 0,-2z M30,24l2,0 0,2 -2,0 0,-2z M32,24l2,0 0,2 -2,0 0,-2z M36,24l2,0 0,2 -2,0 0,-2z M44,24l2,0 0,2 -2,0 0,-2z M50,24l2,0 0,2 -2,0 0,-2z M54,24l2,0 0,2 -2,0 0,-2z M10,26l2,0 0,2 -2,0 0,-2z M12,26l2,0 0,2 -2,0 0,-2z M14,26l2,0 0,2 -2,0 0,-2z M22,26l2,0 0,2 -2,0 0,-2z M28,26l2,0 0,2 -2,0 0,-2z M30,26l2,0 0,2 -2,0 0,-2z M32,26l2,0 0,2 -2,0 0,-2z M34,26l2,0 0,2 -2,0 0,-2z M40,26l2,0 0,2 -2,0 0,-2z M48,26l2,0 0,2 -2,0 0,-2z M52,26l2,0 0,2 -2,0 0,-2z M58,26l2,0 0,2 -2,0 0,-2z M64,26l2,0 0,2 -2,0 0,-2z M8,28l2,0 0,2 -2,0 0,-2z M16,28l2,0 0,2 -2,0 0,-2z M20,28l2,0 0,2 -2,0 0,-2z M24,28l2,0 0,2 -2,0 0,-2z M26,28l2,0 0,2 -2,0 0,-2z M28,28l2,0 0,2 -2,0 0,-2z M30,28l2,0 0,2 -2,0 0,-2z M34,28l2,0 0,2 -2,0 0,-2z M36,28l2,0 0,2 -2,0 0,-2z M40,28l2,0 0,2 -2,0 0,-2z M42,28l2,0 0,2 -2,0 0,-2z M46,28l2,0 0,2 -2,0 0,-2z M54,28l2,0 0,2 -2,0 0,-2z M56,28l2,0 0,2 -2,0 0,-2z M58,28l2,0 0,2 -2,0 0,-2z M60,28l2,0 0,2 -2,0 0,-2z M62,28l2,0 0,2 -2,0 0,-2z M10,30l2,0 0,2 -2,0 0,-2z M12,30l2,0 0,2 -2,0 0,-2z M16,30l2,0 0,2 -2,0 0,-2z M18,30l2,0 0,2 -2,0 0,-2z M22,30l2,0 0,2 -2,0 0,-2z M28,30l2,0 0,2 -2,0 0,-2z M30,30l2,0 0,2 -2,0 0,-2z M32,30l2,0 0,2 -2,0 0,-2z M34,30l2,0 0,2 -2,0 0,-2z M38,30l2,0 0,2 -2,0 0,-2z M44,30l2,0 0,2 -2,0 0,-2z M46,30l2,0 0,2 -2,0 0,-2z M52,30l2,0 0,2 -2,0 0,-2z M54,30l2,0 0,2 -2,0 0,-2z M60,30l2,0 0,2 -2,0 0,-2z M62,30l2,0 0,2 -2,0 0,-2z M8,32l2,0 0,2 -2,0 0,-2z M16,32l2,0 0,2 -2,0 0,-2z M20,32l2,0 0,2 -2,0 0,-2z M22,32l2,0 0,2 -2,0 0,-2z M26,32l2,0 0,2 -2,0 0,-2z M30,32l2,0 0,2 -2,0 0,-2z M36,32l2,0 0,2 -2,0 0,-2z M38,32l2,0 0,2 -2,0 0,-2z M40,32l2,0 0,2 -2,0 0,-2z M42,32l2,0 0,2 -2,0 0,-2z M50,32l2,0 0,2 -2,0 0,-2z M52,32l2,0 0,2 -2,0 0,-2z M58,32l2,0 0,2 -2,0 0,-2z M62,32l2,0 0,2 -2,0 0,-2z M64,32l2,0 0,2 -2,0 0,-2z M14,34l2,0 0,2 -2,0 0,-2z M16,34l2,0 0,2 -2,0 0,-2z M18,34l2,0 0,2 -2,0 0,-2z M24,34l2,0 0,2 -2,0 0,-2z M28,34l2,0 0,2 -2,0 0,-2z M30,34l2,0 0,2 -2,0 0,-2z M32,34l2,0 0,2 -2,0 0,-2z M34,34l2,0 0,2 -2,0 0,-2z M36,34l2,0 0,2 -2,0 0,-2z M42,34l2,0 0,2 -2,0 0,-2z M46,34l2,0 0,2 -2,0 0,-2z M48,34l2,0 0,2 -2,0 0,-2z M12,36l2,0 0,2 -2,0 0,-2z M14,36l2,0 0,2 -2,0 0,-2z M16,36l2,0 0,2 -2,0 0,-2z M20,36l2,0 0,2 -2,0 0,-2z M34,36l2,0 0,2 -2,0 0,-2z M36,36l2,0 0,2 -2,0 0,-2z M40,36l2,0 0,2 -2,0 0,-2z M44,36l2,0 0,2 -2,0 0,-2z M52,36l2,0 0,2 -2,0 0,-2z M54,36l2,0 0,2 -2,0 0,-2z M56,36l2,0 0,2 -2,0 0,-2z M58,36l2,0 0,2 -2,0 0,-2z M60,36l2,0 0,2 -2,0 0,-2z M62,36l2,0 0,2 -2,0 0,-2z M64,36l2,0 0,2 -2,0 0,-2z M14,38l2,0 0,2 -2,0 0,-2z M16,38l2,0 0,2 -2,0 0,-2z M28,38l2,0 0,2 -2,0 0,-2z M32,38l2,0 0,2 -2,0 0,-2z M38,38l2,0 0,2 -2,0 0,-2z M40,38l2,0 0,2 -2,0 0,-2z M42,38l2,0 0,2 -2,0 0,-2z M44,38l2,0 0,2 -2,0 0,-2z M46,38l2,0 0,2 -2,0 0,-2z M52,38l2,0 0,2 -2,0 0,-2z M56,38l2,0 0,2 -2,0 0,-2z M58,38l2,0 0,2 -2,0 0,-2z M62,38l2,0 0,2 -2,0 0,-2z M8,40l2,0 0,2 -2,0 0,-2z M10,40l2,0 0,2 -2,0 0,-2z M14,40l2,0 0,2 -2,0 0,-2z M20,40l2,0 0,2 -2,0 0,-2z M24,40l2,0 0,2 -2,0 0,-2z M26,40l2,0 0,2 -2,0 0,-2z M28,40l2,0 0,2 -2,0 0,-2z M30,40l2,0 0,2 -2,0 0,-2z M32,40l2,0 0,2 -2,0 0,-2z M34,40l2,0 0,2 -2,0 0,-2z M38,40l2,0 0,2 -2,0 0,-2z M42,40l2,0 0,2 -2,0 0,-2z M48,40l2,0 0,2 -2,0 0,-2z M62,40l2,0 0,2 -2,0 0,-2z M14,42l2,0 0,2 -2,0 0,-2z M16,42l2,0 0,2 -2,0 0,-2z M26,42l2,0 0,2 -2,0 0,-2z M32,42l2,0 0,2 -2,0 0,-2z M34,42l2,0 0,2 -2,0 0,-2z M36,42l2,0 0,2 -2,0 0,-2z M40,42l2,0 0,2 -2,0 0,-2z M42,42l2,0 0,2 -2,0 0,-2z M50,42l2,0 0,2 -2,0 0,-2z M52,42l2,0 0,2 -2,0 0,-2z M54,42l2,0 0,2 -2,0 0,-2z M58,42l2,0 0,2 -2,0 0,-2z M64,42l2,0 0,2 -2,0 0,-2z M8,44l2,0 0,2 -2,0 0,-2z M14,44l2,0 0,2 -2,0 0,-2z M18,44l2,0 0,2 -2,0 0,-2z M20,44l2,0 0,2 -2,0 0,-2z M22,44l2,0 0,2 -2,0 0,-2z M24,44l2,0 0,2 -2,0 0,-2z M26,44l2,0 0,2 -2,0 0,-2z M28,44l2,0 0,2 -2,0 0,-2z M30,44l2,0 0,2 -2,0 0,-2z M32,44l2,0 0,2 -2,0 0,-2z M36,44l2,0 0,2 -2,0 0,-2z M42,44l2,0 0,2 -2,0 0,-2z M48,44l2,0 0,2 -2,0 0,-2z M50,44l2,0 0,2 -2,0 0,-2z M54,44l2,0 0,2 -2,0 0,-2z M62,44l2,0 0,2 -2,0 0,-2z M64,44l2,0 0,2 -2,0 0,-2z M12,46l2,0 0,2 -2,0 0,-2z M16,46l2,0 0,2 -2,0 0,-2z M22,46l2,0 0,2 -2,0 0,-2z M24,46l2,0 0,2 -2,0 0,-2z M26,46l2,0 0,2 -2,0 0,-2z M28,46l2,0 0,2 -2,0 0,-2z M30,46l2,0 0,2 -2,0 0,-2z M36,46l2,0 0,2 -2,0 0,-2z M38,46l2,0 0,2 -2,0 0,-2z M42,46l2,0 0,2 -2,0 0,-2z M44,46l2,0 0,2 -2,0 0,-2z M48,46l2,0 0,2 -2,0 0,-2z M50,46l2,0 0,2 -2,0 0,-2z M54,46l2,0 0,2 -2,0 0,-2z M56,46l2,0 0,2 -2,0 0,-2z M62,46l2,0 0,2 -2,0 0,-2z M64,46l2,0 0,2 -2,0 0,-2z M8,48l2,0 0,2 -2,0 0,-2z M12,48l2,0 0,2 -2,0 0,-2z M20,48l2,0 0,2 -2,0 0,-2z M26,48l2,0 0,2 -2,0 0,-2z M38,48l2,0 0,2 -2,0 0,-2z M40,48l2,0 0,2 -2,0 0,-2z M48,48l2,0 0,2 -2,0 0,-2z M50,48l2,0 0,2 -2,0 0,-2z M52,48l2,0 0,2 -2,0 0,-2z M54,48l2,0 0,2 -2,0 0,-2z M56,48l2,0 0,2 -2,0 0,-2z M60,48l2,0 0,2 -2,0 0,-2z M24,50l2,0 0,2 -2,0 0,-2z M26,50l2,0 0,2 -2,0 0,-2z M36,50l2,0 0,2 -2,0 0,-2z M42,50l2,0 0,2 -2,0 0,-2z M44,50l2,0 0,2 -2,0 0,-2z M48,50l2,0 0,2 -2,0 0,-2z M56,50l2,0 0,2 -2,0 0,-2z M60,50l2,0 0,2 -2,0 0,-2z M62,50l2,0 0,2 -2,0 0,-2z M64,50l2,0 0,2 -2,0 0,-2z M8,52l2,0 0,2 -2,0 0,-2z M10,52l2,0 0,2 -2,0 0,-2z M12,52l2,0 0,2 -2,0 0,-2z M14,52l2,0 0,2 -2,0 0,-2z M16,52l2,0 0,2 -2,0 0,-2z M18,52l2,0 0,2 -2,0 0,-2z M20,52l2,0 0,2 -2,0 0,-2z M26,52l2,0 0,2 -2,0 0,-2z M28,52l2,0 0,2 -2,0 0,-2z M30,52l2,0 0,2 -2,0 0,-2z M40,52l2,0 0,2 -2,0 0,-2z M42,52l2,0 0,2 -2,0 0,-2z M44,52l2,0 0,2 -2,0 0,-2z M48,52l2,0 0,2 -2,0 0,-2z M52,52l2,0 0,2 -2,0 0,-2z M56,52l2,0 0,2 -2,0 0,-2z M62,52l2,0 0,2 -2,0 0,-2z M8,54l2,0 0,2 -2,0 0,-2z M20,54l2,0 0,2 -2,0 0,-2z M24,54l2,0 0,2 -2,0 0,-2z M26,54l2,0 0,2 -2,0 0,-2z M28,54l2,0 0,2 -2,0 0,-2z M30,54l2,0 0,2 -2,0 0,-2z M36,54l2,0 0,2 -2,0 0,-2z M38,54l2,0 0,2 -2,0 0,-2z M48,54l2,0 0,2 -2,0 0,-2z M56,54l2,0 0,2 -2,0 0,-2z M58,54l2,0 0,2 -2,0 0,-2z M60,54l2,0 0,2 -2,0 0,-2z M8,56l2,0 0,2 -2,0 0,-2z M12,56l2,0 0,2 -2,0 0,-2z M14,56l2,0 0,2 -2,0 0,-2z M16,56l2,0 0,2 -2,0 0,-2z M20,56l2,0 0,2 -2,0 0,-2z M40,56l2,0 0,2 -2,0 0,-2z M42,56l2,0 0,2 -2,0 0,-2z M48,56l2,0 0,2 -2,0 0,-2z M50,56l2,0 0,2 -2,0 0,-2z M52,56l2,0 0,2 -2,0 0,-2z M54,56l2,0 0,2 -2,0 0,-2z M56,56l2,0 0,2 -2,0 0,-2z M62,56l2,0 0,2 -2,0 0,-2z M64,56l2,0 0,2 -2,0 0,-2z M8,58l2,0 0,2 -2,0 0,-2z M12,58l2,0 0,2 -2,0 0,-2z M14,58l2,0 0,2 -2,0 0,-2z M16,58l2,0 0,2 -2,0 0,-2z M20,58l2,0 0,2 -2,0 0,-2z M24,58l2,0 0,2 -2,0 0,-2z M26,58l2,0 0,2 -2,0 0,-2z M28,58l2,0 0,2 -2,0 0,-2z M30,58l2,0 0,2 -2,0 0,-2z M32,58l2,0 0,2 -2,0 0,-2z M34,58l2,0 0,2 -2,0 0,-2z M46,58l2,0 0,2 -2,0 0,-2z M52,58l2,0 0,2 -2,0 0,-2z M54,58l2,0 0,2 -2,0 0,-2z M56,58l2,0 0,2 -2,0 0,-2z M58,58l2,0 0,2 -2,0 0,-2z M60,58l2,0 0,2 -2,0 0,-2z M62,58l2,0 0,2 -2,0 0,-2z M8,60l2,0 0,2 -2,0 0,-2z M12,60l2,0 0,2 -2,0 0,-2z M14,60l2,0 0,2 -2,0 0,-2z M16,60l2,0 0,2 -2,0 0,-2z M20,60l2,0 0,2 -2,0 0,-2z M26,60l2,0 0,2 -2,0 0,-2z M28,60l2,0 0,2 -2,0 0,-2z M32,60l2,0 0,2 -2,0 0,-2z M40,60l2,0 0,2 -2,0 0,-2z M48,60l2,0 0,2 -2,0 0,-2z M56,60l2,0 0,2 -2,0 0,-2z M58,60l2,0 0,2 -2,0 0,-2z M60,60l2,0 0,2 -2,0 0,-2z M64,60l2,0 0,2 -2,0 0,-2z M8,62l2,0 0,2 -2,0 0,-2z M20,62l2,0 0,2 -2,0 0,-2z M28,62l2,0 0,2 -2,0 0,-2z M34,62l2,0 0,2 -2,0 0,-2z M40,62l2,0 0,2 -2,0 0,-2z M42,62l2,0 0,2 -2,0 0,-2z M44,62l2,0 0,2 -2,0 0,-2z M46,62l2,0 0,2 -2,0 0,-2z M48,62l2,0 0,2 -2,0 0,-2z M62,62l2,0 0,2 -2,0 0,-2z M8,64l2,0 0,2 -2,0 0,-2z M10,64l2,0 0,2 -2,0 0,-2z M12,64l2,0 0,2 -2,0 0,-2z M14,64l2,0 0,2 -2,0 0,-2z M16,64l2,0 0,2 -2,0 0,-2z M18,64l2,0 0,2 -2,0 0,-2z M20,64l2,0 0,2 -2,0 0,-2z M24,64l2,0 0,2 -2,0 0,-2z M28,64l2,0 0,2 -2,0 0,-2z M32,64l2,0 0,2 -2,0 0,-2z M38,64l2,0 0,2 -2,0 0,-2z M42,64l2,0 0,2 -2,0 0,-2z M48,64l2,0 0,2 -2,0 0,-2z M50,64l2,0 0,2 -2,0 0,-2z M52,64l2,0 0,2 -2,0 0,-2z M56,64l2,0 0,2 -2,0 0,-2z M58,64l2,0 0,2 -2,0 0,-2z M62,64l2,0 0,2 -2,0 0,-2z " stroke="transparent" fill="black"></path></svg>
@@ -179,7 +181,8 @@
 
 
 
-        <a class="btn btn-primary btn-lg" href="https://akless.github.io/corona-list/" role="button">Zur App gehen</a>
+        <a class="btn btn-primary mb-5 btn-lg" href="https://akless.github.io/corona-list/" role="button">Zur App gehen</a>
+      </div>
 
 
         <!-- Footer -->

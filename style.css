@@ -4,6 +4,35 @@ svg {
   width: 300px;
 }
 
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 0;
+  height: 0;
+  overflow: hidden;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#benefits .row {
+  justify-content: center;
+}
+
+#benefits2 .row {
+  justify-content: center;
+}
+
+#benefits3 .row {
+  justify-content: center;
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -42,7 +71,7 @@ html, body {
 
 .list-button {
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 
