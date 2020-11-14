@@ -4,6 +4,12 @@ svg {
   width: 300px;
 }
 
+video {
+  width: 100%;
+  min-width: 350px;
+  max-width: 560px;
+}
+
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
