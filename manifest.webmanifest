@@ -1,0 +1,8 @@
+{
+  "name": "Corona Kontaktliste",
+  "short_name": "Corona-Liste",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color" : "#fff" ,
+  "description": "Eine kostenlose App zur Protokollierung von Kontakten. Eine Datenübertragung findet ausschließlich über QR-Code statt."
+}
