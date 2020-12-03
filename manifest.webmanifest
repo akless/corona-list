@@ -2,12 +2,12 @@
   "short_name": "Corona Kontaktliste",
   "icons": [
     {
-      "src": "/corona-list/resources/img/icon-192.png",
+      "src": "/corona-list/icon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/corona-list/resources/img/icon-512.png",
+      "src": "/corona-list/icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
