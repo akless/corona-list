@@ -1,5 +1,6 @@
 {
-  "short_name": "Corona Kontaktliste",
+  "name": "Corona Kontaktliste",
+  "short_name": "Corona-Liste",
   "icons": [
     {
       "src": "/corona-list/icon-192.png",
