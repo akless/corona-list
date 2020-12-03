@@ -1,8 +1,21 @@
 {
-  "name": "Corona Kontaktliste",
-  "short_name": "Corona-Liste",
-  "start_url": ".",
+  "short_name": "Corona Kontaktliste",
+  "icons": [
+    {
+      "src": "/resources/img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/resources/img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color" : "#3367D6",
   "display": "standalone",
-  "background_color" : "#fff" ,
-  "description": "Eine kostenlose App zur Protokollierung von Kontakten. Eine Datenübertragung findet ausschließlich über QR-Code statt."
+  "scope": "/",
+  "theme_color": "#3367D6",
+  "description": "Kostenlose App zur Protokollierung von Kontakten. Eine Übertragung von Daten findet ausschließlich per QR-Code statt."
 }
