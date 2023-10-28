@@ -85,6 +85,9 @@
        */
       this.start = async function () {
 
+        // remove loading icon
+        $.setContent( this.element, '' );
+
         /**
          * received encoded guest data from web URL (if any exists)
          * @type {string}
